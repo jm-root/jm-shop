@@ -6,7 +6,7 @@ let Schema = mongoose.Schema
 let schemaDefine = {
   code: {type: Number, unique: true}, // 000 xxx 商品编码6位 每级3位
   name: {type: String}, // 商品名称
-  pid: {type: Schema.Types.ObjectId, ref: 'category'},
+  parent: {type: Schema.Types.ObjectId, ref: 'category'},
   crTime: {type: Date, default: Date.now} // 创建时间
 }
 

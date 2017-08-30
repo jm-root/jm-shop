@@ -19,6 +19,7 @@ export default function (opts = {}) {
 
   o.onReady()
     .then(function () {
+      o.category = require('./category')(o, opts)
       o.product = require('./product')(o, opts)
       o.order = require('./order')(o, opts)
       o.address = require('./address')(o, opts)
