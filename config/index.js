@@ -3,8 +3,6 @@ var config = {
   development: {
     port: 3000,
     lng: 'zh_CN',
-    avatarDir: process.cwd() + '/../uploads',
-    avatarPrefix: '/avatar',
     modules: {
       'shop': {
         module: process.cwd() + '/lib'
@@ -15,8 +13,6 @@ var config = {
     port: 3000,
     db: 'mongodb://mongo.db/shop',
     tokenExpire: 3600,
-    disableVerifyCode: false,
-    disableAutoUid: false,
     modules: {
       'shop': {
         module: process.cwd() + '/lib'

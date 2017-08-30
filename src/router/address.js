@@ -20,10 +20,9 @@ export default function (service, opts = {}) {
     options: {
       sort: [{'crtime': -1}]
     },
-    fields: {
-    },
+    fields: {},
     populations: {
-      path: 'creator',
+      path: 'user',
       select: {
         nick: 1
       }
@@ -31,10 +30,9 @@ export default function (service, opts = {}) {
   }
 
   var getOpts = opts.get || {
-    fields: {
-    },
+    fields: {},
     populations: {
-      path: 'creator',
+      path: 'user',
       select: {
         nick: 1
       }
@@ -43,10 +41,23 @@ export default function (service, opts = {}) {
 
   let router = ms.router()
   service.onReady().then(() => {
-    router.use(daorouter(service.product, {
-      list: listOpts,
-      get: getOpts
-    }))
+    router
+      .add('/', 'get', function (opts, cb, next) {
+        if (opts.headers && opts.headers.acl_user) {
+          opts.data.userId = opts.headers.acl_user
+        }
+        next()
+      })
+      .add('/', 'get', function (opts, cb, next) {
+        if (opts.data.userId) {
+          opts.conditions || (opts.conditions = {})
+          opts.conditions.user = opts.data.userId
+        }
+      })
+      .use(daorouter(service.address, {
+        list: listOpts,
+        get: getOpts
+      }))
   })
   return router
 };

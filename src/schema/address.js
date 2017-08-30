@@ -1,12 +1,10 @@
-/**
- * Created by Admin on 2016/5/13.
- */
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+import mongoose from 'mongoose'
+
+let Schema = mongoose.Schema
 
 // 用户地址
-var schemaDefine = {
-  userId: Schema.Types.ObjectId, // 用户id
+let schemaDefine = {
+  user: {type: Schema.Types.ObjectId, ref: 'user'},
   name: String, // 用户名字
   mobile: String, // 电话
   country: String, // 国家
@@ -19,7 +17,7 @@ var schemaDefine = {
   modiTime: {type: Date, default: Date.now} // 更改时间
 }
 
-module.exports = function (schema, opts) {
+export default function (schema) {
   schema = schema || new Schema()
   schema.add(schemaDefine)
   return schema

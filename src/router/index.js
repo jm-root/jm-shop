@@ -1,6 +1,8 @@
 import error from 'jm-err'
-import daorouter from 'jm-ms-daorouter'
 import MS from 'jm-ms-core'
+import product from './product'
+import order from './order'
+import address from './address'
 
 let ms = new MS()
 let Err = error.Err
@@ -18,40 +20,11 @@ export default function (opts = {}) {
 
   let router = ms.router()
   this.onReady().then(() => {
-    router.add('/products', 'get', function (opts, cb) {
-      cb(null, {
-        rows: [
-          {
-            id: '1212112',
-            title: '红酒',
-            intro: '介绍',
-            content: '内容',
-            prict: '100',
-            tb: '50'
-
-          },
-          {
-            id: '121332112',
-            title: '红酒2',
-            intro: '介绍',
-            content: '内容',
-            prict: '100',
-            tb: '50'
-          }
-        ]
-      })
-    })
-
-    router.add('/products/:id', 'get', function (opts, cb) {
-      cb(null, {
-        id: '1212112',
-        title: '红酒',
-        intro: '介绍',
-        content: '内容',
-        prict: '100',
-        tb: '50'
-      })
-    })
+    router
+      .use('/users', service._user_router(opts))
+      .use('/products', product(service, opts))
+      .use('/orders', order(service, opts))
+      .use('/addresses', address(service, opts))
   })
   return router
 };

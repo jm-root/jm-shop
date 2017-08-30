@@ -23,7 +23,7 @@ export default function (service, opts = {}) {
     fields: {
     },
     populations: {
-      path: 'creator',
+      path: 'user',
       select: {
         nick: 1
       }
@@ -34,7 +34,7 @@ export default function (service, opts = {}) {
     fields: {
     },
     populations: {
-      path: 'creator',
+      path: 'user',
       select: {
         nick: 1
       }
@@ -43,7 +43,7 @@ export default function (service, opts = {}) {
 
   let router = ms.router()
   service.onReady().then(() => {
-    router.use(daorouter(service.product, {
+    router.use(daorouter(service.order, {
       list: listOpts,
       get: getOpts
     }))
