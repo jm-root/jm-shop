@@ -1,5 +1,6 @@
 import error from 'jm-err'
 import MS from 'jm-ms-core'
+import category from './category'
 import product from './product'
 import order from './order'
 import address from './address'
@@ -22,6 +23,7 @@ export default function (opts = {}) {
   this.onReady().then(() => {
     router
       .use('/users', service._user_router(opts))
+      .use('/categorys', category(service, opts))
       .use('/products', product(service, opts))
       .use('/orders', order(service, opts))
       .use('/addresses', address(service, opts))
