@@ -53,6 +53,7 @@ export default function (service, opts = {}) {
           opts.conditions || (opts.conditions = {})
           opts.conditions.user = opts.data.userId
         }
+        next()
       })
       .use(daorouter(service.address, {
         list: listOpts,
