@@ -27,7 +27,7 @@ export default function (service, opts = {}) {
         select: 'nick'
       },
       {
-        path: 'productss.products',
+        path: 'products.product',
         select: 'name price'
       }
     ]
@@ -41,7 +41,7 @@ export default function (service, opts = {}) {
         select: 'nick'
       },
       {
-        path: 'productss.products',
+        path: 'products.product',
         select: 'name price'
       }
     ]

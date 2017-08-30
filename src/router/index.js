@@ -1,5 +1,6 @@
 import error from 'jm-err'
 import MS from 'jm-ms-core'
+import help from './help'
 import category from './category'
 import product from './product'
 import order from './order'
@@ -20,6 +21,15 @@ export default function (opts = {}) {
   }
 
   let router = ms.router()
+  router
+    .use(help(service))
+    .use(function (opts, cb, next) {
+      if (!service.ready) {
+        return cb(null, t(Err.FA_NOTREADY, opts.lng))
+      }
+      next()
+    })
+
   this.onReady().then(() => {
     router
       .use('/users', service._user_router(opts))

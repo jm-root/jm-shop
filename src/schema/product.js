@@ -26,7 +26,7 @@ let schemaDefine = {
   type: {type: Number, default: 0}, // 0 实物 1 虚拟
   status: {type: Number, default: 1}, // 0:关闭,1:开启
   attach: {type: Schema.Types.ObjectId}, // 关联物品id
-  currency: {type: String, default: 'rmb'}, // 币种
+  currency: {type: String, default: 'cny'}, // 币种
   visible: {type: Number, default: 0} // 是否前端可见
 }
 
