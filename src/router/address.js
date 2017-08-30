@@ -48,6 +48,12 @@ export default function (service, opts = {}) {
         }
         next()
       })
+      .add('/', 'post', function (opts, cb, next) {
+        if (opts.headers && opts.headers.acl_user) {
+          opts.data.user = opts.headers.acl_user
+        }
+        next()
+      })
       .add('/', 'get', function (opts, cb, next) {
         if (opts.data.userId) {
           opts.conditions || (opts.conditions = {})

@@ -20,33 +20,32 @@ export default function (service, opts = {}) {
     options: {
       sort: [{'crtime': -1}]
     },
-    fields: {
-    },
+    fields: {},
     populations: {
-      path: 'creator',
+      path: 'category',
       select: {
-        nick: 1
+        name: 1
       }
     }
   }
 
   var getOpts = opts.get || {
-    fields: {
-    },
+    fields: {},
     populations: {
-      path: 'creator',
+      path: 'category',
       select: {
-        nick: 1
+        name: 1
       }
     }
   }
 
   let router = ms.router()
   service.onReady().then(() => {
-    router.use(daorouter(service.product, {
-      list: listOpts,
-      get: getOpts
-    }))
+    router
+      .use(daorouter(service.product, {
+        list: listOpts,
+        get: getOpts
+      }))
   })
   return router
 };

@@ -20,33 +20,59 @@ export default function (service, opts = {}) {
     options: {
       sort: [{'crtime': -1}]
     },
-    fields: {
-    },
-    populations: {
-      path: 'user',
-      select: {
-        nick: 1
+    fields: {},
+    populations: [
+      {
+        path: 'user',
+        select: 'nick'
+      },
+      {
+        path: 'productss.products',
+        select: 'name price'
       }
-    }
+    ]
   }
 
   var getOpts = opts.get || {
-    fields: {
-    },
-    populations: {
-      path: 'user',
-      select: {
-        nick: 1
+    fields: {},
+    populations: [
+      {
+        path: 'user',
+        select: 'nick'
+      },
+      {
+        path: 'productss.products',
+        select: 'name price'
       }
-    }
+    ]
   }
 
   let router = ms.router()
   service.onReady().then(() => {
-    router.use(daorouter(service.order, {
-      list: listOpts,
-      get: getOpts
-    }))
+    router
+      .add('/', 'get', function (opts, cb, next) {
+        if (opts.headers && opts.headers.acl_user) {
+          opts.data.userId = opts.headers.acl_user
+        }
+        next()
+      })
+      .add('/', 'post', function (opts, cb, next) {
+        if (opts.headers && opts.headers.acl_user) {
+          opts.data.user = opts.headers.acl_user
+        }
+        next()
+      })
+      .add('/', 'get', function (opts, cb, next) {
+        if (opts.data.userId) {
+          opts.conditions || (opts.conditions = {})
+          opts.conditions.user = opts.data.userId
+        }
+        next()
+      })
+      .use(daorouter(service.order, {
+        list: listOpts,
+        get: getOpts
+      }))
   })
   return router
 };
