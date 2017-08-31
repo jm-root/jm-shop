@@ -63,9 +63,12 @@ export default function (service, opts = {}) {
         next()
       })
       .add('/', 'get', function (opts, cb, next) {
+        opts.conditions || (opts.conditions = {})
         if (opts.data.userId) {
-          opts.conditions || (opts.conditions = {})
           opts.conditions.user = opts.data.userId
+        }
+        if (opts.data.status) {
+          opts.conditions.status = opts.data.status
         }
         next()
       })
