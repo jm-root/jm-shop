@@ -18,7 +18,7 @@ let schemaDefine = {
   tags: [{type: String}], // 商品标签
   thumb: {type: String}, // 缩略图
   img: {type: String}, // 图片
-  originalImg: {type: String}, // 原图
+  images: [{type: String}], // 多图
   crtime: {type: Date, default: Date.now}, // 创建时间
   moditime: {type: Date, default: Date.now}, // 创建时间
   inventory: {type: Number, default: 0}, // 库存

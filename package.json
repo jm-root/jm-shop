@@ -1,6 +1,6 @@
 {
   "name": "jm-shop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "general shop service",
   "main": "./lib/index",
   "scripts": {
