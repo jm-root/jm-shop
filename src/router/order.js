@@ -28,7 +28,7 @@ export default function (service, opts = {}) {
       },
       {
         path: 'products.product',
-        select: 'name price'
+        select: 'name price thumb'
       }
     ]
   }
@@ -42,7 +42,7 @@ export default function (service, opts = {}) {
       },
       {
         path: 'products.product',
-        select: 'name price'
+        select: 'name price thumb'
       }
     ]
   }
